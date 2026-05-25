@@ -1,5 +1,6 @@
-import pytest
 import os
+import pytest
+
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.options.ios import XCUITestOptions
@@ -44,7 +45,9 @@ def build_options(platform):
 
         options.set_capability("platformName", "iOS")
         options.set_capability("automationName", "XCUITest")
-        options.set_capability("browserName", "Safari")
+
+        # NATIVE APP
+        options.set_capability("app", config.ios_app)
 
         options.set_capability(
             "bstack:options",
@@ -60,6 +63,7 @@ def build_options(platform):
 
     return options
 
+
 @pytest.fixture(scope="function")
 def driver(request):
 
@@ -71,12 +75,22 @@ def driver(request):
             "Use @pytest.mark.platform('android'|'ios')"
         )
 
-    jenkins_platform = os.getenv("PLATFORM")
+    marker_platform = marker.args[0].lower()
+    env_platform = os.getenv("PLATFORM")
 
-    if jenkins_platform:
-        platform = jenkins_platform
-    else:
-        platform = marker.args[0]
+    if env_platform:
+        env_platform = env_platform.lower()
+
+        if env_platform != marker_platform:
+            raise RuntimeError(
+                f"Platform mismatch:\n"
+                f"marker={marker_platform}\n"
+                f"env={env_platform}"
+            )
+
+    platform = env_platform or marker_platform
+
+
     options = build_options(platform)
 
     driver = webdriver.Remote(
