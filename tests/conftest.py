@@ -46,7 +46,6 @@ def build_options(platform):
         options.set_capability("platformName", "iOS")
         options.set_capability("automationName", "XCUITest")
 
-        # MOBILE WEB
         options.set_capability("browserName", "Safari")
 
         options.set_capability(
@@ -87,12 +86,6 @@ def driver(request):
             )
 
     platform = env_platform or marker_platform
-
-    print("\n========== DRIVER CONFIG ==========")
-    print(f"MARKER: {marker_platform}")
-    print(f"ENV: {env_platform}")
-    print(f"FINAL: {platform}")
-    print("===================================\n")
 
     options = build_options(platform)
 
