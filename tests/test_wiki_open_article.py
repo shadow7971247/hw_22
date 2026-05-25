@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-@pytest.mark.platform("android")
+@pytest.mark.android
 @allure.feature("Wikipedia Android")
 @allure.story("Search")
 @allure.title("Search for actor: Denzel Washington")

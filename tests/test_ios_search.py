@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-@pytest.mark.platform("ios")
+@pytest.mark.ios
 @allure.feature("Wikipedia iOS Web")
 @allure.story("Search")
 def test_ios_search_equalizer(driver):
