@@ -46,8 +46,8 @@ def build_options(platform):
         options.set_capability("platformName", "iOS")
         options.set_capability("automationName", "XCUITest")
 
-        # NATIVE APP
-        options.set_capability("app", config.ios_app)
+        # MOBILE WEB
+        options.set_capability("browserName", "Safari")
 
         options.set_capability(
             "bstack:options",
@@ -71,7 +71,6 @@ def driver(request):
 
     if marker is None:
         raise RuntimeError(
-            "Platform marker missing. "
             "Use @pytest.mark.platform('android'|'ios')"
         )
 
@@ -83,13 +82,17 @@ def driver(request):
 
         if env_platform != marker_platform:
             raise RuntimeError(
-                f"Platform mismatch:\n"
-                f"marker={marker_platform}\n"
-                f"env={env_platform}"
+                f"Platform mismatch: "
+                f"marker={marker_platform}, env={env_platform}"
             )
 
     platform = env_platform or marker_platform
 
+    print("\n========== DRIVER CONFIG ==========")
+    print(f"MARKER: {marker_platform}")
+    print(f"ENV: {env_platform}")
+    print(f"FINAL: {platform}")
+    print("===================================\n")
 
     options = build_options(platform)
 
