@@ -1,12 +1,12 @@
 import pytest
 import allure
-
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
 @pytest.mark.ios
+@pytest.mark.platform("ios")
 @allure.feature("Wikipedia iOS Web")
 @allure.story("Search")
 def test_ios_search_equalizer(driver):

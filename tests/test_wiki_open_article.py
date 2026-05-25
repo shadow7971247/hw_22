@@ -1,12 +1,12 @@
 import pytest
 import allure
-
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
 @pytest.mark.android
+@pytest.mark.platform("android")
 @allure.feature("Wikipedia Android")
 @allure.story("Search")
 @allure.title("Search for actor: Denzel Washington")

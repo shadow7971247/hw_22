@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 @pytest.mark.android
+@pytest.mark.platform("android")
 @allure.feature("Wikipedia Android")
 @allure.story("Search")
 @allure.title("Search for film: The Equalizer")
